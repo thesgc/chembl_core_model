@@ -28,6 +28,7 @@ class ResearchStem(six.with_metaclass(ChemblModelMetaClass, ChemblCoreAbstractMo
     research_stem = ChemblCharField(max_length=20, unique=True, blank=True, null=True, help_text=u'The actual stem/prefix used in the research code.')
 
     class Meta(ChemblCoreAbstractModel.Meta):
+        app_label='chembl_core_model'
         pass
 
 #-----------------------------------------------------------------------------------------------------------------------
