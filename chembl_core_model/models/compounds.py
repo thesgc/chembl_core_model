@@ -134,7 +134,8 @@ class MoleculeDictionary(six.with_metaclass(ChemblModelMetaClass, ChemblCoreAbst
             return self.moleculehierarchy
         return None
 
-    molregno = ChemblAutoField(primary_key=True, length=9, help_text=u'Internal Primary Key for the molecule')
+    molregno = models.AutoField(primary_key=True)
+    #molregno = ChemblAutoField(primary_key=True, length=9, help_text=u'Internal Primary Key for the molecule')
     pref_name = ChemblCharField(max_length=255, db_index=True, blank=True, null=True, help_text=u'Preferred name for the molecule')
     chembl = models.ForeignKey(ChemblIdLookup, unique=True, blank=True, null=False, help_text=u'ChEMBL identifier for this compound (for use on web interface etc)') # This combination of null and blank is actually very important!
     max_phase = ChemblPositiveIntegerField(length=1, db_index=True, default=0, choices=MAX_PHASE_CHOICES, help_text=u'Maximum phase of development reached for the compound (4 = approved). Null where max phase has not yet been assigned.')
@@ -235,7 +236,7 @@ class CompoundProperties(six.with_metaclass(ChemblModelMetaClass, ChemblCoreAbst
     heavy_atoms = ChemblPositiveIntegerField(length=3, blank=True, null=True, help_text=u'Number of heavy (non-hydrogen) atoms')
     num_alerts = ChemblPositiveIntegerField(length=3, blank=True, null=True, help_text=u'Number of structural alerts (as defined by Brenk et al., ChemMedChem 2008)')
     qed_weighted = ChemblPositiveDecimalField(blank=True, null=True, max_digits=3, decimal_places=2, help_text=u'Weighted quantitative estimate of drug likeness (as defined by Bickerton et al., Nature Chem 2012)')
-    updated_on = ChemblDateField(blank=True, null=True, help_text=u'Shows date properties were last recalculated')
+   # updated_on = ChemblDateField(blank=True, null=True, help_text=u'Shows date properties were last recalculated')
     mw_monoisotopic = ChemblPositiveDecimalField(blank=True, null=True, max_digits=11, decimal_places=4, help_text=u'Monoisotopic parent molecular weight')
     full_molformula = ChemblCharField(max_length=100, blank=True, null=True, help_text=u'Molecular formula for the full compound (including any salt)')
 
