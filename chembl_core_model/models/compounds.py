@@ -102,7 +102,11 @@ class MoleculeDictionary(six.with_metaclass(ChemblModelMetaClass, ChemblCoreAbst
         ('MOL', 'MOL'),
         ('SEQ', 'SEQ'),
         ('BOTH', 'BOTH'),
+        ('BLIND_ID', 'Blind ID'),
+
         )
+
+
 
     @property
     def compoundImage(self):
@@ -134,8 +138,7 @@ class MoleculeDictionary(six.with_metaclass(ChemblModelMetaClass, ChemblCoreAbst
             return self.moleculehierarchy
         return None
 
-    molregno = models.AutoField(primary_key=True)
-    #molregno = ChemblAutoField(primary_key=True, length=9, help_text=u'Internal Primary Key for the molecule')
+    molregno = models.AutoField(primary_key=True,  help_text=u'Internal Primary Key for the molecule')
     pref_name = ChemblCharField(max_length=255, db_index=True, blank=True, null=True, help_text=u'Preferred name for the molecule')
     chembl = models.ForeignKey(ChemblIdLookup, unique=True, blank=True, null=False, help_text=u'ChEMBL identifier for this compound (for use on web interface etc)') # This combination of null and blank is actually very important!
     max_phase = ChemblPositiveIntegerField(length=1, db_index=True, default=0, choices=MAX_PHASE_CHOICES, help_text=u'Maximum phase of development reached for the compound (4 = approved). Null where max phase has not yet been assigned.')
@@ -175,8 +178,15 @@ class MoleculeDictionary(six.with_metaclass(ChemblModelMetaClass, ChemblCoreAbst
     products = models.ManyToManyField('Products', through="Formulations", null=True, blank=True)
     docs = models.ManyToManyField('Docs', through="CompoundRecords", null=True, blank=True)
     assays = models.ManyToManyField('Assays', through="Activities", null=True, blank=True)
+    
+    project = models.ForeignKey("cbh_chembl_model_extension.Project", blank=True, null=False)
+
+    forced_reg_reason = ChemblCharField(max_length=200, blank=True, null=True, help_text=u'Reason for forced registration (e.g., known to be a stereoisomer)')
+    forced_reg_index = ChemblPositiveIntegerField(length=1, db_index=True, default=0, help_text=u'Number of times this structure key has been forced to be registered')
+    public = ChemblBooleanField(default=False, help_text=u'Whether this molecule has been marked as public')
 
     class Meta(ChemblCoreAbstractModel.Meta):
+        unique_together = ('structure_key', 'project', 'structure_type', 'forced_reg_index')
         pass
 
 #-----------------------------------------------------------------------------------------------------------------------
@@ -236,7 +246,7 @@ class CompoundProperties(six.with_metaclass(ChemblModelMetaClass, ChemblCoreAbst
     heavy_atoms = ChemblPositiveIntegerField(length=3, blank=True, null=True, help_text=u'Number of heavy (non-hydrogen) atoms')
     num_alerts = ChemblPositiveIntegerField(length=3, blank=True, null=True, help_text=u'Number of structural alerts (as defined by Brenk et al., ChemMedChem 2008)')
     qed_weighted = ChemblPositiveDecimalField(blank=True, null=True, max_digits=3, decimal_places=2, help_text=u'Weighted quantitative estimate of drug likeness (as defined by Bickerton et al., Nature Chem 2012)')
-   # updated_on = ChemblDateField(blank=True, null=True, help_text=u'Shows date properties were last recalculated')
+    updated_on = ChemblDateField(blank=True, null=True, help_text=u'Shows date properties were last recalculated')
     mw_monoisotopic = ChemblPositiveDecimalField(blank=True, null=True, max_digits=11, decimal_places=4, help_text=u'Monoisotopic parent molecular weight')
     full_molformula = ChemblCharField(max_length=100, blank=True, null=True, help_text=u'Molecular formula for the full compound (including any salt)')
 
@@ -340,10 +350,11 @@ class CompoundMols(six.with_metaclass(ChemblModelMetaClass, ChemblCoreAbstractMo
 #-----------------------------------------------------------------------------------------------------------------------
 
 class CompoundStructures(six.with_metaclass(ChemblModelMetaClass, ChemblCoreAbstractModel)):
+    '''Note that the unique index has been removed from this table due to redundancy of molecules in projects.'''
 
     molecule = models.OneToOneField(MoleculeDictionary, primary_key=True, db_column='molregno', help_text=u'Internal Primary Key for the compound structure and foreign key to molecule_dictionary table')
     molfile = ChemblTextField(blank=True, null=True, help_text=u'MDL Connection table representation of compound')
-    standard_inchi = ChemblCharField(max_length=4000, db_index=True, unique=True, blank=True, null=True, help_text=u'IUPAC standard InChI for the compound')
+    standard_inchi = ChemblCharField(max_length=4000, db_index=True,  blank=True, null=True, help_text=u'IUPAC standard InChI for the compound')
     standard_inchi_key = ChemblCharField(max_length=27, db_index=True, help_text=u'IUPAC standard InChI key for the compound')
     canonical_smiles = ChemblCharField(max_length=4000, db_index=True, blank=True, null=True, help_text=u'Canonical smiles, generated using pipeline pilot')
     structure_exclude_flag = ChemblBooleanField(default=False, help_text=u'Indicates whether the structure for this compound should be hidden from users (e.g., organometallic compounds with bad valence etc)')
