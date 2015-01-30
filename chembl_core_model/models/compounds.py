@@ -4,7 +4,7 @@ import datetime
 from django.db import models
 from chembl_core_model.models import *
 from chembl_core_db.db.customFields import BlobField, ChemblCharField
-from chembl_core_db.db.customManagers import CompoundMolsManager
+from chembl_core_db.db.customManagers import CompoundMolsManager, MoleculeDictionaryManager
 from chembl_core_db.db.models.abstractModel import ChemblCoreAbstractModel
 from chembl_core_db.db.models.abstractModel import ChemblModelMetaClass
 from django.utils import six
@@ -179,15 +179,16 @@ class MoleculeDictionary(six.with_metaclass(ChemblModelMetaClass, ChemblCoreAbst
     docs = models.ManyToManyField('Docs', through="CompoundRecords", null=True, blank=True)
     assays = models.ManyToManyField('Assays', through="Activities", null=True, blank=True)
     
+    #Chembiohub extra fields
+    created_by = models.ForeignKey("auth.User", null=True, blank=True)
     project = models.ForeignKey("cbh_chembl_model_extension.Project", blank=True, null=False)
-
     forced_reg_reason = ChemblCharField(max_length=200, blank=True, null=True, help_text=u'Reason for forced registration (e.g., known to be a stereoisomer)')
     forced_reg_index = ChemblPositiveIntegerField(length=1, db_index=True, default=0, help_text=u'Number of times this structure key has been forced to be registered')
     public = ChemblBooleanField(default=False, help_text=u'Whether this molecule has been marked as public')
+    objects = MoleculeDictionaryManager()
 
     class Meta(ChemblCoreAbstractModel.Meta):
         unique_together = ('structure_key', 'project', 'structure_type', 'forced_reg_index')
-        pass
 
 #-----------------------------------------------------------------------------------------------------------------------
 
