@@ -6,6 +6,8 @@ import datetime
 import chembl_core_db.db.customFields
 
 
+
+
 class Migration(migrations.Migration):
 
     dependencies = [
@@ -22,8 +24,9 @@ class Migration(migrations.Migration):
             options={
                 'abstract': False,
                 'managed': True,
+                'db_table' : 'action_type',                
             },
-            bases=(models.Model,),
+            bases=( models.Model,),
         ),
         migrations.CreateModel(
             name='Activities',
@@ -53,6 +56,7 @@ class Migration(migrations.Migration):
             options={
                 'abstract': False,
                 'managed': True,
+                'db_table' : 'activities',   
             },
             bases=(models.Model,),
         ),
@@ -69,6 +73,7 @@ class Migration(migrations.Migration):
             options={
                 'abstract': False,
                 'managed': True,
+                'db_table' : 'activities_stds_lookup'
             },
             bases=(models.Model,),
         ),
@@ -81,6 +86,7 @@ class Migration(migrations.Migration):
             options={
                 'abstract': False,
                 'managed': True,
+                'db_table': 'assay_parameters'
             },
             bases=(models.Model,),
         ),
@@ -119,6 +125,7 @@ class Migration(migrations.Migration):
             options={
                 'abstract': False,
                 'managed': True,
+                'db_table': 'assays'
             },
             bases=(models.Model,),
         ),
@@ -131,6 +138,7 @@ class Migration(migrations.Migration):
             options={
                 'abstract': False,
                 'managed': True,
+                'db_table': 'assay_type'
             },
             bases=(models.Model,),
         ),
@@ -152,6 +160,7 @@ class Migration(migrations.Migration):
             options={
                 'abstract': False,
                 'managed': True,
+                'db_table' : 'atc_classification'
             },
             bases=(models.Model,),
         ),
@@ -164,6 +173,7 @@ class Migration(migrations.Migration):
             options={
                 'abstract': False,
                 'managed': True,
+                'db_table': 'binding_sites'
             },
             bases=(models.Model,),
         ),
@@ -187,6 +197,7 @@ class Migration(migrations.Migration):
             options={
                 'abstract': False,
                 'managed': True,
+                'db_table': 'bio_component_sequences'
             },
             bases=(models.Model,),
         ),
@@ -197,7 +208,7 @@ class Migration(migrations.Migration):
             ],
             options={
                 'abstract': False,
-                'managed': True,
+                'managed': True,'db_table': 'biotherapeutics_components'
             },
             bases=(models.Model,),
         ),
@@ -218,6 +229,7 @@ class Migration(migrations.Migration):
             options={
                 'abstract': False,
                 'managed': True,
+                'db_table': 'cell_dictionary'
             },
             bases=(models.Model,),
         ),
@@ -232,6 +244,7 @@ class Migration(migrations.Migration):
             options={
                 'abstract': False,
                 'managed': True,
+                'db_table': 'chembl_id_lookup'
             },
             bases=(models.Model,),
         ),
@@ -243,6 +256,7 @@ class Migration(migrations.Migration):
             options={
                 'abstract': False,
                 'managed': True,
+                'db_table': 'component_class'
             },
             bases=(models.Model,),
         ),
@@ -256,6 +270,7 @@ class Migration(migrations.Migration):
             options={
                 'abstract': False,
                 'managed': True,
+                'db_table': 'component_domains'
             },
             bases=(models.Model,),
         ),
@@ -279,6 +294,7 @@ class Migration(migrations.Migration):
             options={
                 'abstract': False,
                 'managed': True,
+                'db_table': 'component_sequences'
             },
             bases=(models.Model,),
         ),
@@ -293,6 +309,7 @@ class Migration(migrations.Migration):
             options={
                 'abstract': False,
                 'managed': True,
+                'db_table': 'component_synonyms'
             },
             bases=(models.Model,),
         ),
@@ -314,6 +331,7 @@ class Migration(migrations.Migration):
             options={
                 'abstract': False,
                 'managed': True,
+                'db_table': 'compound_records'
             },
             bases=(models.Model,),
         ),
@@ -327,6 +345,7 @@ class Migration(migrations.Migration):
             options={
                 'abstract': False,
                 'managed': True,
+                'db_table': 'confidence_score_lookup'
             },
             bases=(models.Model,),
         ),
@@ -339,6 +358,7 @@ class Migration(migrations.Migration):
             options={
                 'abstract': False,
                 'managed': True,
+                'db_table': 'curation_lookup'
             },
             bases=(models.Model,),
         ),
@@ -351,6 +371,7 @@ class Migration(migrations.Migration):
             options={
                 'abstract': False,
                 'managed': True,
+                'db_table': 'data_validity_lookup'
             },
             bases=(models.Model,),
         ),
@@ -367,6 +388,7 @@ class Migration(migrations.Migration):
             options={
                 'abstract': False,
                 'managed': True,
+                'db_table': 'defined_daily_dose'
             },
             bases=(models.Model,),
         ),
@@ -393,6 +415,7 @@ class Migration(migrations.Migration):
             options={
                 'abstract': False,
                 'managed': True,
+                'db_table': 'docs'
             },
             bases=(models.Model,),
         ),
@@ -409,6 +432,7 @@ class Migration(migrations.Migration):
             options={
                 'abstract': False,
                 'managed': True,
+                'db_table': 'domains'
             },
             bases=(models.Model,),
         ),
@@ -436,6 +460,7 @@ class Migration(migrations.Migration):
             options={
                 'abstract': False,
                 'managed': True,
+                'db_table': 'drug_mechanism'
             },
             bases=(models.Model,),
         ),
@@ -449,6 +474,7 @@ class Migration(migrations.Migration):
             options={
                 'abstract': False,
                 'managed': True,
+		'db_table': 'formulations'
             },
             bases=(models.Model,),
         ),
@@ -479,6 +505,7 @@ class Migration(migrations.Migration):
             options={
                 'abstract': False,
                 'managed': True,
+                'db_table': 'journal_articles'
             },
             bases=(models.Model,),
         ),
@@ -498,6 +525,7 @@ class Migration(migrations.Migration):
             options={
                 'abstract': False,
                 'managed': True,
+                'db_table': 'journals'
             },
             bases=(models.Model,),
         ),
@@ -513,6 +541,7 @@ class Migration(migrations.Migration):
             options={
                 'abstract': False,
                 'managed': True,
+                'db_table': 'ligand_eff'
             },
             bases=(models.Model,),
         ),
@@ -528,6 +557,7 @@ class Migration(migrations.Migration):
             options={
                 'abstract': False,
                 'managed': True,
+                'db_table': 'mechanism_refs'
             },
             bases=(models.Model,),
         ),
@@ -540,6 +570,7 @@ class Migration(migrations.Migration):
             options={
                 'abstract': False,
                 'managed': True,
+                'db_table': 'molecule_atc_classification'
             },
             bases=(models.Model,),
         ),
@@ -586,6 +617,7 @@ class Migration(migrations.Migration):
             options={
                 'abstract': False,
                 'managed': True,
+                'db_table': 'molecule_dictionary'
             },
             bases=(models.Model,),
         ),
@@ -602,6 +634,7 @@ class Migration(migrations.Migration):
             options={
                 'abstract': False,
                 'managed': True,
+                'db_table': 'compound_structures'
             },
             bases=(models.Model,),
         ),
@@ -635,6 +668,7 @@ class Migration(migrations.Migration):
             options={
                 'abstract': False,
                 'managed': True,
+                'db_table': 'compound_properties'
             },
             bases=(models.Model,),
         ),
@@ -661,6 +695,7 @@ class Migration(migrations.Migration):
             options={
                 'abstract': False,
                 'managed': True,
+                'db_table': 'compound_images'
             },
             bases=(models.Model,),
         ),
@@ -674,6 +709,7 @@ class Migration(migrations.Migration):
             options={
                 'abstract': False,
                 'managed': True,
+                'db_table': 'biotherapeutics'
             },
             bases=(models.Model,),
         ),
@@ -687,6 +723,7 @@ class Migration(migrations.Migration):
             options={
                 'abstract': False,
                 'managed': True,
+                'db_table': 'molecule_hierarchy'
             },
             bases=(models.Model,),
         ),
@@ -701,6 +738,7 @@ class Migration(migrations.Migration):
             options={
                 'abstract': False,
                 'managed': True,
+                'db_table': 'molecule_synonyms'
             },
             bases=(models.Model,),
         ),
@@ -716,6 +754,7 @@ class Migration(migrations.Migration):
             options={
                 'abstract': False,
                 'managed': True,
+                'db_table': 'organism_class'
             },
             bases=(models.Model,),
         ),
@@ -728,6 +767,7 @@ class Migration(migrations.Migration):
             options={
                 'abstract': False,
                 'managed': True,
+                'db_table': 'parameter_type'
             },
             bases=(models.Model,),
         ),
@@ -743,6 +783,7 @@ class Migration(migrations.Migration):
             options={
                 'abstract': False,
                 'managed': True,
+                'db_table': 'predicted_binding_domains'
             },
             bases=(models.Model,),
         ),
@@ -771,7 +812,7 @@ class Migration(migrations.Migration):
             ],
             options={
                 'abstract': False,
-                'managed': True,
+                'managed': True, 'db_table': 'products'
             },
             bases=(models.Model,),
         ),
@@ -793,6 +834,7 @@ class Migration(migrations.Migration):
             options={
                 'abstract': False,
                 'managed': True,
+                'db_table': 'protein_classification'
             },
             bases=(models.Model,),
         ),
@@ -807,6 +849,7 @@ class Migration(migrations.Migration):
             options={
                 'abstract': False,
                 'managed': True,
+                'db_table': 'protein_classification_synonyms'
             },
             bases=(models.Model,),
         ),
@@ -827,6 +870,7 @@ class Migration(migrations.Migration):
             options={
                 'abstract': False,
                 'managed': True,
+                'db_table': 'protein_family_classification'
             },
             bases=(models.Model,),
         ),
@@ -860,6 +904,7 @@ class Migration(migrations.Migration):
             options={
                 'abstract': False,
                 'managed': True,
+                'db_table': 'record_drug_properties'
             },
             bases=(models.Model,),
         ),
@@ -872,6 +917,7 @@ class Migration(migrations.Migration):
             options={
                 'abstract': False,
                 'managed': True,
+                'db_table' : 'relationship_type'
             },
             bases=(models.Model,),
         ),
@@ -886,6 +932,7 @@ class Migration(migrations.Migration):
             options={
                 'abstract': False,
                 'managed': True,
+'db_table': 'research_companies'
             },
             bases=(models.Model,),
         ),
@@ -898,7 +945,7 @@ class Migration(migrations.Migration):
             options={
                 'abstract': False,
                 'managed': True,
-            },
+            'db_table': 'research_stem'},
             bases=(models.Model,),
         ),
         migrations.CreateModel(
@@ -912,7 +959,7 @@ class Migration(migrations.Migration):
             ],
             options={
                 'abstract': False,
-                'managed': True,
+                'managed': True,'db_table': 'site_components'
             },
             bases=(models.Model,),
         ),
@@ -925,7 +972,7 @@ class Migration(migrations.Migration):
             ],
             options={
                 'abstract': False,
-                'managed': True,
+                'managed': True,'db_table': 'source'
             },
             bases=(models.Model,),
         ),
@@ -940,7 +987,7 @@ class Migration(migrations.Migration):
             ],
             options={
                 'abstract': False,
-                'managed': True,
+                'managed': True,'db_table': 'target_components'
             },
             bases=(models.Model,),
         ),
@@ -965,7 +1012,7 @@ class Migration(migrations.Migration):
             ],
             options={
                 'abstract': False,
-                'managed': True,
+                'managed': True,'db_table': 'target_dictionary'
             },
             bases=(models.Model,),
         ),
@@ -979,7 +1026,7 @@ class Migration(migrations.Migration):
             ],
             options={
                 'abstract': False,
-                'managed': True,
+                'managed': True,'db_table': 'target_relations'
             },
             bases=(models.Model,),
         ),
@@ -992,7 +1039,7 @@ class Migration(migrations.Migration):
             ],
             options={
                 'abstract': False,
-                'managed': True,
+                'managed': True, 'db_table': 'target_type'
             },
             bases=(models.Model,),
         ),
@@ -1010,7 +1057,7 @@ class Migration(migrations.Migration):
             ],
             options={
                 'abstract': False,
-                'managed': True,
+                'managed': True,'db_table': 'usan_stems'
             },
             bases=(models.Model,),
         ),
@@ -1023,7 +1070,7 @@ class Migration(migrations.Migration):
             ],
             options={
                 'abstract': False,
-                'managed': True,
+                'managed': True,'db_table': 'version'
             },
             bases=(models.Model,),
         ),
