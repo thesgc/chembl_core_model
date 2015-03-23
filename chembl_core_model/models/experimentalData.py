@@ -167,7 +167,6 @@ class Activities(six.with_metaclass(ChemblModelMetaClass, ChemblCoreAbstractMode
     doc = models.ForeignKey(Docs, blank=True, null=True, help_text=u'Foreign key to documents table (for quick lookup of publication details - can also link to documents through compound_records or assays table)')
     record = models.ForeignKey(CompoundRecords, help_text=u'Foreign key to the compound_records table (containing information on the compound tested)')
     molecule = models.ForeignKey(MoleculeDictionary, blank=True, null=True, db_column='molregno', help_text=u'Foreign key to compounds table (for quick lookup of compound structure - can also link to compounds through compound_records table)')
-    activity_type = ChemblCharField(max_length=250, db_index=True, blank=True, null=True, help_text=u'Deprecated. Use published_activity_type or standard_type columns') # TODO: Deprecated
     standard_relation = ChemblCharField(max_length=50, db_index=True, blank=True, null=True, novalidate=True, choices=STANDARD_RELATION_CHOICES, help_text=u'Symbol constraining the activity value (e.g. >, <, =)')
     published_value = ChemblNoLimitDecimalField(db_index=True, blank=True, null=True, help_text=u'Datapoint value as it appears in the original publication.') # TODO: NUMBER in Oracle
     published_units = ChemblCharField(max_length=100, db_index=True, blank=True, null=True, help_text=u'Units of measurement as they appear in the original publication')
@@ -179,7 +178,7 @@ class Activities(six.with_metaclass(ChemblModelMetaClass, ChemblCoreAbstractMode
     updated_on = ChemblDateField(blank=True, null=True)
     activity_comment = ChemblCharField(max_length=4000, blank=True, null=True, help_text=u"Describes non-numeric activities i.e. 'Slighty active', 'Not determined'")
     published_type = ChemblCharField(max_length=250, db_index=True, blank=True, null=True, help_text=u'Type of end-point measurement: e.g. IC50, LD50, %inhibition etc, as it appears in the original publication')
-    manual_curation_flag = ChemblPositiveIntegerField(length=1, blank=True, null=True, default=0, choices=MANUAL_CURATION_FLAG_CHOICES)
+    manual_curation_flag = ChemblPositiveIntegerField(length=1, blank=False, null=True, default=0, choices=MANUAL_CURATION_FLAG_CHOICES) # blank is false because it has default value
     data_validity_comment = models.ForeignKey(DataValidityLookup, blank=True, null=True, db_column='data_validity_comment', help_text=u"Comment reflecting whether the values for this activity measurement are likely to be correct - one of 'Manually validated' (checked original paper and value is correct), 'Potential author error' (value looks incorrect but is as reported in the original paper), 'Outside typical range' (value seems too high/low to be correct e.g., negative IC50 value), 'Non standard unit type' (units look incorrect for this activity type).")
     potential_duplicate = ChemblNullableBooleanField(help_text=u'Indicates whether the value is likely to be a repeat citation of a value reported in a previous ChEMBL paper, rather than a new, independent measurement.') # TODO: this has only two states: (null, 1), change it to (0,1)
     published_relation = ChemblCharField(max_length=50, db_index=True, blank=True, null=True, help_text=u'Symbol constraining the activity value (e.g. >, <, =), as it appears in the original publication')
