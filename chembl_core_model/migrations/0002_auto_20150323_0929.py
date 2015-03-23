@@ -20,6 +20,7 @@ class Migration(migrations.Migration):
             options={
                 'abstract': False,
                 'managed': True,
+                'db_table':'compund_structural_alerts'
             },
         ),
         migrations.CreateModel(
@@ -40,7 +41,7 @@ class Migration(migrations.Migration):
             ],
             options={
                 'abstract': False,
-                'managed': True,
+                'managed': True,'db_table': 'frac_classification'
             },
         ),
         migrations.CreateModel(
@@ -57,7 +58,7 @@ class Migration(migrations.Migration):
             ],
             options={
                 'abstract': False,
-                'managed': True,
+                'managed': True,'db_table': 'hrac_classification'
             },
         ),
         migrations.CreateModel(
@@ -76,7 +77,7 @@ class Migration(migrations.Migration):
             ],
             options={
                 'abstract': False,
-                'managed': True,
+                'managed': True,'db_table':'irac_classification'
             },
         ),
         migrations.CreateModel(
@@ -88,7 +89,7 @@ class Migration(migrations.Migration):
             ],
             options={
                 'abstract': False,
-                'managed': True,
+                'managed': True,'db_table': 'molecule_frac_classification'
             },
         ),
         migrations.CreateModel(
@@ -100,7 +101,7 @@ class Migration(migrations.Migration):
             ],
             options={
                 'abstract': False,
-                'managed': True,
+                'managed': True,'db_table': 'molecule_hrac_classification'
             },
         ),
         migrations.CreateModel(
@@ -113,6 +114,7 @@ class Migration(migrations.Migration):
             options={
                 'abstract': False,
                 'managed': True,
+                'db_table': 'molecule_irac_classification'
             },
         ),
         migrations.CreateModel(
@@ -123,7 +125,7 @@ class Migration(migrations.Migration):
             ],
             options={
                 'abstract': False,
-                'managed': True,
+                'managed': True,'db_table': 'patient_use_codes'
             },
         ),
         migrations.CreateModel(
@@ -140,7 +142,7 @@ class Migration(migrations.Migration):
             ],
             options={
                 'abstract': False,
-                'managed': True,
+                'managed': True,'db_table':'product_patents'
             },
         ),
         migrations.CreateModel(
@@ -152,7 +154,7 @@ class Migration(migrations.Migration):
             ],
             options={
                 'abstract': False,
-                'managed': True,
+                'managed': True,'db_table': 'structural_alerts'
             },
         ),
         migrations.CreateModel(
@@ -164,7 +166,7 @@ class Migration(migrations.Migration):
             ],
             options={
                 'abstract': False,
-                'managed': True,
+                'managed': True,'db_table': 'structural_alert_sets'
             },
         ),
         migrations.RemoveField(
