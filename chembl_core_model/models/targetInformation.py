@@ -270,7 +270,7 @@ class TargetRelations(six.with_metaclass(ChemblModelMetaClass, ChemblCoreAbstrac
 
     target = models.ForeignKey(TargetDictionary, related_name='to', db_column='tid', help_text=u'Identifier for target of interest (foreign key to target_dictionary table)')
     relationship = ChemblCharField(max_length=20, choices=RELATIONSHIP_CHOICES, help_text=u'Relationship between two targets (e.g., SUBSET OF, SUPERSET OF, OVERLAPS WITH)')
-    related_target = models.ForeignKey(TargetDictionary, related_name='from', db_column='related_tid', help_text=u'Identifier for the target that is related to the target of interest (foreign key to target_dicitionary table)')
+    related_target = models.ForeignKey(TargetDictionary, related_name='from_target', db_column='related_tid', help_text=u'Identifier for the target that is related to the target of interest (foreign key to target_dicitionary table)')
     targrel_id = ChemblPositiveIntegerField(primary_key=True, length=9, help_text=u'Primary key')
 
     class Meta(ChemblCoreAbstractModel.Meta):

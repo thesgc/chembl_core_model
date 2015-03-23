@@ -21,7 +21,6 @@ class Migration(migrations.Migration):
                 'abstract': False,
                 'managed': True,
             },
-            bases=(models.Model,),
         ),
         migrations.CreateModel(
             name='FracClassification',
@@ -43,7 +42,6 @@ class Migration(migrations.Migration):
                 'abstract': False,
                 'managed': True,
             },
-            bases=(models.Model,),
         ),
         migrations.CreateModel(
             name='HracClassification',
@@ -61,7 +59,6 @@ class Migration(migrations.Migration):
                 'abstract': False,
                 'managed': True,
             },
-            bases=(models.Model,),
         ),
         migrations.CreateModel(
             name='IracClassification',
@@ -81,7 +78,6 @@ class Migration(migrations.Migration):
                 'abstract': False,
                 'managed': True,
             },
-            bases=(models.Model,),
         ),
         migrations.CreateModel(
             name='MoleculeFracClassification',
@@ -94,7 +90,6 @@ class Migration(migrations.Migration):
                 'abstract': False,
                 'managed': True,
             },
-            bases=(models.Model,),
         ),
         migrations.CreateModel(
             name='MoleculeHracClassification',
@@ -107,7 +102,6 @@ class Migration(migrations.Migration):
                 'abstract': False,
                 'managed': True,
             },
-            bases=(models.Model,),
         ),
         migrations.CreateModel(
             name='MoleculeIracClassification',
@@ -120,7 +114,6 @@ class Migration(migrations.Migration):
                 'abstract': False,
                 'managed': True,
             },
-            bases=(models.Model,),
         ),
         migrations.CreateModel(
             name='PatentUseCodes',
@@ -132,7 +125,6 @@ class Migration(migrations.Migration):
                 'abstract': False,
                 'managed': True,
             },
-            bases=(models.Model,),
         ),
         migrations.CreateModel(
             name='ProductPatents',
@@ -145,13 +137,11 @@ class Migration(migrations.Migration):
                 ('delist_flag', chembl_core_db.db.customFields.ChemblBooleanField(default=False, help_text='Sponsor has requested patent be delisted if set to 1.  This patent has remained listed because, under Section 505(j)(5)(D)(i) of the Act, a first applicant may retain eligibility for 180-day exclusivity based on a paragraph IV certification to this patent for a certain period.  Applicants under Section 505(b)(2) are not required to certify to patents where this flag is set to 1')),
                 ('in_products', chembl_core_db.db.customFields.ChemblPositiveIntegerField(default=0, help_text='Indicates whether the PRODUCT_ID can be found in the PRODUCTS table (where set to 1)')),
                 ('patent_use_code', models.ForeignKey(db_column=b'patent_use_code', blank=True, to='chembl_core_model.PatentUseCodes', help_text='Code to designate a use patent that covers the approved indication or use of a drug product', null=True)),
-                ('product', models.ForeignKey(help_text='Foreign key to products table - FDA application number for the product', to='chembl_core_model.Products')),
             ],
             options={
                 'abstract': False,
                 'managed': True,
             },
-            bases=(models.Model,),
         ),
         migrations.CreateModel(
             name='StructuralAlerts',
@@ -164,7 +154,6 @@ class Migration(migrations.Migration):
                 'abstract': False,
                 'managed': True,
             },
-            bases=(models.Model,),
         ),
         migrations.CreateModel(
             name='StructuralAlertSets',
@@ -177,45 +166,6 @@ class Migration(migrations.Migration):
                 'abstract': False,
                 'managed': True,
             },
-            bases=(models.Model,),
-        ),
-        migrations.AddField(
-            model_name='structuralalerts',
-            name='alert_set',
-            field=models.ForeignKey(choices=[(1, b'1'), (2, b'2'), (3, b'3'), (4, b'4'), (5, b'5'), (6, b'6'), (7, b'7'), (8, b'8')], to='chembl_core_model.StructuralAlertSets', help_text='Foreign key to structural_alert_sets table indicating which set this particular alert comes from'),
-            preserve_default=True,
-        ),
-        migrations.AlterUniqueTogether(
-            name='productpatents',
-            unique_together=set([('product', 'patent_no', 'patent_expire_date', 'patent_use_code')]),
-        ),
-        migrations.AlterUniqueTogether(
-            name='moleculeiracclassification',
-            unique_together=set([('irac_class', 'molecule')]),
-        ),
-        migrations.AlterUniqueTogether(
-            name='moleculehracclassification',
-            unique_together=set([('hrac_class', 'molecule')]),
-        ),
-        migrations.AlterUniqueTogether(
-            name='moleculefracclassification',
-            unique_together=set([('frac_class', 'molecule')]),
-        ),
-        migrations.AddField(
-            model_name='compoundstructuralalerts',
-            name='alert',
-            field=models.ForeignKey(help_text='Foreign key to the structural_alerts table. The particular alert that has been identified in this compound.', to='chembl_core_model.StructuralAlerts'),
-            preserve_default=True,
-        ),
-        migrations.AddField(
-            model_name='compoundstructuralalerts',
-            name='molecule',
-            field=models.ForeignKey(db_column=b'molregno', to='chembl_core_model.MoleculeDictionary', help_text='Foreign key to the molecule_dictionary. The compound for which the structural alert has been found.'),
-            preserve_default=True,
-        ),
-        migrations.AlterUniqueTogether(
-            name='compoundstructuralalerts',
-            unique_together=set([('molecule', 'alert')]),
         ),
         migrations.RemoveField(
             model_name='activities',
@@ -241,150 +191,170 @@ class Migration(migrations.Migration):
             model_name='biotherapeutics',
             name='helm_notation',
             field=chembl_core_db.db.customFields.ChemblCharField(help_text='Sequence notation generated according to the HELM standard (http://www.openhelm.org/home). Currently for peptides only', max_length=4000, null=True, blank=True),
-            preserve_default=True,
         ),
         migrations.AddField(
             model_name='celldictionary',
             name='chembl',
             field=models.ForeignKey(blank=True, to='chembl_core_model.ChemblIdLookup', help_text='ChEMBL identifier for the cell (used in web interface etc)', null=True),
-            preserve_default=True,
         ),
         migrations.AddField(
             model_name='celldictionary',
             name='cl_lincs_id',
             field=chembl_core_db.db.customFields.ChemblCharField(help_text='Cell ID used in LINCS (Library of Integrated Network-based Cellular Signatures)', max_length=8, null=True, blank=True),
-            preserve_default=True,
         ),
         migrations.AddField(
             model_name='compoundproperties',
             name='hba_lipinski',
             field=chembl_core_db.db.customFields.ChemblPositiveIntegerField(help_text="Number of hydrogen bond acceptors calculated according to Lipinski's original rules (i.e., N + O count))", null=True, blank=True),
-            preserve_default=True,
         ),
         migrations.AddField(
             model_name='compoundproperties',
             name='hbd_lipinski',
             field=chembl_core_db.db.customFields.ChemblPositiveIntegerField(help_text="Number of hydrogen bond donors calculated according to Lipinski's original rules (i.e., NH + OH count)", null=True, blank=True),
-            preserve_default=True,
         ),
         migrations.AddField(
             model_name='compoundproperties',
             name='num_lipinski_ro5_violations',
             field=chembl_core_db.db.customFields.ChemblPositiveIntegerField(blank=True, help_text="Number of violations of Lipinski's rule of five using HBA_LIPINSKI and HBD_LIPINSKI counts", null=True, choices=[(0, b'0'), (1, b'1'), (2, b'2'), (3, b'3'), (4, b'4')]),
-            preserve_default=True,
         ),
-        migrations.AlterField(
-            model_name='celldictionary',
-            name='downgraded',
-            field=chembl_core_db.db.customFields.ChemblNullableBooleanField(default=False, help_text='Indicates the cell line has been removed (if set to 1)'),
-            preserve_default=True,
-        ),
+        #migrations.AlterField(
+        #    model_name='celldictionary',
+        #    name='downgraded',
+        #    field=chembl_core_db.db.customFields.ChemblNullableBooleanField(default=False, help_text='Indicates the cell line has been removed (if set to 1)'),
+        #),
         migrations.AlterField(
             model_name='chemblidlookup',
             name='entity_id',
-            field=chembl_core_db.db.customFields.ChemblIntegerField(default=None, help_text='Primary key for that entity in corresponding table (e.g., molregno for compounds, tid for targets)'),
-            preserve_default=False,
+            field=chembl_core_db.db.customFields.ChemblIntegerField(help_text='Primary key for that entity in corresponding table (e.g., molregno for compounds, tid for targets)'),
         ),
         migrations.AlterField(
             model_name='chemblidlookup',
             name='entity_type',
-            field=chembl_core_db.db.customFields.ChemblCharField(default=None, help_text='Type of entity (e.g., COMPOUND, ASSAY, TARGET)', max_length=50, choices=[(b'ASSAY', b'ASSAY'), (b'CELL', b'CELL'), (b'COMPOUND', b'COMPOUND'), (b'DOCUMENT', b'DOCUMENT'), (b'TARGET', b'TARGET')]),
-            preserve_default=False,
+            field=chembl_core_db.db.customFields.ChemblCharField(help_text='Type of entity (e.g., COMPOUND, ASSAY, TARGET)', max_length=50,)
         ),
         migrations.AlterField(
             model_name='chemblidlookup',
             name='status',
             field=chembl_core_db.db.customFields.ChemblCharField(default='ACTIVE', help_text='Indicates whether the status of the entity within the database - ACTIVE, INACTIVE (downgraded), OBS (obsolete/removed).', max_length=10, choices=[(b'ACTIVE', b'ACTIVE'), (b'INACTIVE', b'INACTIVE'), (b'OBS', b'OBS')]),
-            preserve_default=True,
         ),
-        migrations.AlterField(
-            model_name='compoundproperties',
-            name='acd_most_bpka',
-            field=chembl_core_db.db.customFields.ChemblPositiveDecimalField(help_text='The most basic pKa calculated using ACDlabs v12.01', null=True, max_digits=9, decimal_places=2, blank=True),
-            preserve_default=True,
-        ),
+        #migrations.AlterField(
+        #    model_name='compoundproperties',
+        #    name='acd_most_bpka',
+        #    field=chembl_core_db.db.customFields.ChemblPositiveDecimalField(help_text='The most basic pKa calculated using ACDlabs v12.01', null=True, max_digits=9, decimal_places=2, blank=True),
+       # ),
         migrations.AlterField(
             model_name='compoundproperties',
             name='med_chem_friendly',
             field=chembl_core_db.db.customFields.ChemblCharField(blank=True, max_length=3, null=True, help_text='DEPRECATED. Replaced by new structural alerts tables. Will be removed in future releases.', choices=[(b'Y', b'Yes'), (b'N', b'No')]),
-            preserve_default=True,
         ),
         migrations.AlterField(
             model_name='compoundproperties',
             name='num_alerts',
             field=chembl_core_db.db.customFields.ChemblPositiveIntegerField(help_text='Number of structural alerts used for QED calculation (as defined by Brenk et al., ChemMedChem 2008)', null=True, blank=True),
-            preserve_default=True,
         ),
         migrations.AlterField(
             model_name='compoundproperties',
             name='num_ro5_violations',
             field=chembl_core_db.db.customFields.ChemblPositiveIntegerField(blank=True, help_text="Number of violations of Lipinski's rule-of-five, using HBA and HBD definitions", null=True, db_index=True, choices=[(0, b'0'), (1, b'1'), (2, b'2'), (3, b'3'), (4, b'4')]),
-            preserve_default=True,
         ),
-        migrations.AlterField(
-            model_name='defineddailydose',
-            name='ddd_value',
-            field=chembl_core_db.db.customFields.ChemblPositiveDecimalField(help_text='Value of defined daily dose', null=True, max_digits=9, decimal_places=2, blank=True),
-            preserve_default=True,
-        ),
+        #migrations.AlterField(
+        #    model_name='defineddailydose',
+        #    name='ddd_value',
+        #    field=chembl_core_db.db.customFields.ChemblPositiveDecimalField(help_text='Value of defined daily dose', null=True, max_digits=9, decimal_places=2, blank=True),
+        #),
         migrations.AlterField(
             model_name='drugmechanism',
             name='selectivity_comment',
-            field=chembl_core_db.db.customFields.ChemblCharField(blank=True, max_length=100, null=True, help_text='Additional comments regarding the selectivity of the drug', choices=[(b'Broad spectrum', b'Broad spectrum'), (b'EDG5 less relevant', b'EDG5 less relevant'), (b'FGFR 1, 2 + 3', b'FGFR 1, 2 + 3'), (b'M3 selective', b'M3 selective'), (b"Non-selective but type 5 receptor is overexpressed in Cushing's disease", b"Non-selective but type 5 receptor is overexpressed in Cushing's disease"), (b'Selective', b'Selective'), (b'Selective for the brain omega-1 receptor (i.e. BZ1-type, i.e. alpha1/beta1/gamma2-GABA receptor)', b'Selective for the brain omega-1 receptor (i.e. BZ1-type, i.e. alpha1/beta1/gamma2-GABA receptor)'), (b'Selectivity for types 2, 3 and 5', b'Selectivity for types 2, 3 and 5'), (b'selectivity for beta-3 containing complexes', b'selectivity for beta-3 containing complexes')]),
-            preserve_default=True,
+            field=chembl_core_db.db.customFields.ChemblCharField(blank=True, max_length=100, null=True, help_text='Additional comments regarding the selectivity of the drug', ),
         ),
         migrations.AlterField(
             model_name='products',
             name='information_source',
             field=chembl_core_db.db.customFields.ChemblCharField(help_text='Source of the product information (e.g., Orange Book)', max_length=100, null=True, blank=True),
-            preserve_default=True,
         ),
         migrations.AlterField(
             model_name='products',
             name='product_class',
             field=chembl_core_db.db.customFields.ChemblCharField(max_length=30, null=True, blank=True),
-            preserve_default=True,
         ),
         migrations.AlterField(
             model_name='proteinclassification',
             name='class_level',
-            field=chembl_core_db.db.customFields.ChemblPositiveIntegerField(default=None, help_text='Level of the class within the hierarchy (level 1 = top level classification)', choices=[(0, b'0'), (1, b'1'), (2, b'2'), (3, b'3'), (4, b'4'), (5, b'5'), (6, b'6'), (7, b'7'), (8, b'8')]),
-            preserve_default=False,
+            field=chembl_core_db.db.customFields.ChemblPositiveIntegerField(help_text='Level of the class within the hierarchy (level 1 = top level classification)', choices=[(0, b'0'), (1, b'1'), (2, b'2'), (3, b'3'), (4, b'4'), (5, b'5'), (6, b'6'), (7, b'7'), (8, b'8')]),
         ),
-        migrations.AlterField(
-            model_name='proteinclassification',
-            name='downgraded',
-            field=chembl_core_db.db.customFields.ChemblBooleanField(default=False),
-            preserve_default=True,
-        ),
-        migrations.AlterField(
-            model_name='targetcomponents',
-            name='homologue',
-            field=chembl_core_db.db.customFields.ChemblPositiveIntegerField(default=0, help_text='Indicates that the given component is a homologue of the correct component (e.g., from a different species) when set to 1. This may be the case if the sequence for the correct protein/nucleic acid cannot be found in sequence databases. A value of 2 indicates that the sequence given is a representative of a species group, e.g., an E. coli protein to represent the target of a broad-spectrum antibiotic.', choices=[(0, b'0'), (1, b'1'), (2, b'2')]),
-            preserve_default=True,
-        ),
+       # migrations.AlterField(
+       #     model_name='proteinclassification',
+       #     name='downgraded',
+       #     field=chembl_core_db.db.customFields.ChemblBooleanField(default=False),
+       # ),
+        #migrations.AlterField(
+        #    model_name='targetcomponents',
+        #    name='homologue',
+        #    field=chembl_core_db.db.customFields.ChemblPositiveIntegerField(default=0, help_text='Indicates that the given component is a homologue of the correct component (e.g., from a different species) when set to 1. This may be the case if the sequence for the correct protein/nucleic acid cannot be found in sequence databases. A value of 2 indicates that the sequence given is a representative of a species group, e.g., an E. coli protein to represent the target of a broad-spectrum antibiotic.', ),
+        #),
         migrations.AlterField(
             model_name='targetcomponents',
             name='relationship',
-            field=chembl_core_db.db.customFields.ChemblCharField(default='UNCURATED', max_length=20, choices=[(b'COMPARATIVE PROTEIN', b'COMPARATIVE PROTEIN'), (b'EQUIVALENT PROTEIN', b'EQUIVALENT PROTEIN'), (b'FUSION PROTEIN', b'FUSION PROTEIN'), (b'GROUP MEMBER', b'GROUP MEMBER'), (b'INTERACTING PROTEIN', b'INTERACTING PROTEIN'), (b'PROTEIN SUBUNIT', b'PROTEIN SUBUNIT'), (b'RNA', b'RNA'), (b'RNA SUBUNIT', b'RNA SUBUNIT'), (b'SINGLE PROTEIN', b'SINGLE PROTEIN'), (b'UNCURATED', b'UNCURATED'), (b'SUBUNIT', b'SUBUNIT')]),
-            preserve_default=True,
+            field=chembl_core_db.db.customFields.ChemblCharField( max_length=20, ),
         ),
-        migrations.AlterField(
-            model_name='targetdictionary',
-            name='downgraded',
-            field=chembl_core_db.db.customFields.ChemblBooleanField(default=False, help_text='Flag to indicate that the target is downgraded (if equal to 1)'),
-            preserve_default=True,
-        ),
+        #migrations.AlterField(
+        #    model_name='targetdictionary',
+        #    name='downgraded',
+        #    field=chembl_core_db.db.customFields.ChemblBooleanField(default=False, help_text='Flag to indicate that the target is downgraded (if equal to 1)'),
+        #),
         migrations.AlterField(
             model_name='targetdictionary',
             name='pref_name',
-            field=chembl_core_db.db.customFields.ChemblCharField(default=None, help_text='Preferred target name: manually curated', max_length=200, db_index=True),
-            preserve_default=False,
+            field=chembl_core_db.db.customFields.ChemblCharField(help_text='Preferred target name: manually curated', max_length=200, db_index=True),
         ),
+       # migrations.AlterField(
+       #     model_name='targetdictionary',
+       #     name='species_group_flag',
+       #     field=chembl_core_db.db.customFields.ChemblBooleanField(default=False, help_text="Flag to indicate whether the target represents a group of species, rather than an individual species (e.g., 'Bacterial DHFR'). Where set to 1, indicates that any associated target components will be a representative, rather than a comprehensive set."),
+       # ),
         migrations.AlterField(
-            model_name='targetdictionary',
-            name='species_group_flag',
-            field=chembl_core_db.db.customFields.ChemblBooleanField(default=False, help_text="Flag to indicate whether the target represents a group of species, rather than an individual species (e.g., 'Bacterial DHFR'). Where set to 1, indicates that any associated target components will be a representative, rather than a comprehensive set."),
-            preserve_default=True,
+            model_name='targetrelations',
+            name='related_target',
+            field=models.ForeignKey(related_name='from_target', db_column=b'related_tid', to='chembl_core_model.TargetDictionary', help_text='Identifier for the target that is related to the target of interest (foreign key to target_dicitionary table)'),
+        ),
+        migrations.AddField(
+            model_name='structuralalerts',
+            name='alert_set',
+            field=models.ForeignKey(choices=[(1, b'1'), (2, b'2'), (3, b'3'), (4, b'4'), (5, b'5'), (6, b'6'), (7, b'7'), (8, b'8')], to='chembl_core_model.StructuralAlertSets', help_text='Foreign key to structural_alert_sets table indicating which set this particular alert comes from'),
+        ),
+        migrations.AddField(
+            model_name='productpatents',
+            name='product',
+            field=models.ForeignKey(help_text='Foreign key to products table - FDA application number for the product', to='chembl_core_model.Products'),
+        ),
+        migrations.AddField(
+            model_name='compoundstructuralalerts',
+            name='alert',
+            field=models.ForeignKey(help_text='Foreign key to the structural_alerts table. The particular alert that has been identified in this compound.', to='chembl_core_model.StructuralAlerts'),
+        ),
+        migrations.AddField(
+            model_name='compoundstructuralalerts',
+            name='molecule',
+            field=models.ForeignKey(db_column=b'molregno', to='chembl_core_model.MoleculeDictionary', help_text='Foreign key to the molecule_dictionary. The compound for which the structural alert has been found.'),
+        ),
+        migrations.AlterUniqueTogether(
+            name='productpatents',
+            unique_together=set([('product', 'patent_no', 'patent_expire_date', 'patent_use_code')]),
+        ),
+        migrations.AlterUniqueTogether(
+            name='moleculeiracclassification',
+            unique_together=set([('irac_class', 'molecule')]),
+        ),
+        migrations.AlterUniqueTogether(
+            name='moleculehracclassification',
+            unique_together=set([('hrac_class', 'molecule')]),
+        ),
+        migrations.AlterUniqueTogether(
+            name='moleculefracclassification',
+            unique_together=set([('frac_class', 'molecule')]),
+        ),
+        migrations.AlterUniqueTogether(
+            name='compoundstructuralalerts',
+            unique_together=set([('molecule', 'alert')]),
         ),
     ]
