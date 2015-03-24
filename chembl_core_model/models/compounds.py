@@ -184,7 +184,7 @@ class MoleculeDictionary(six.with_metaclass(ChemblModelMetaClass, ChemblCoreAbst
 
     molregno = models.AutoField(primary_key=True,  help_text=u'Internal Primary Key for the molecule')
     pref_name = ChemblCharField(max_length=255, db_index=True, blank=True, null=True, help_text=u'Preferred name for the molecule')
-    chembl = models.ForeignKey(ChemblIdLookup, unique=True, blank=True, null=False, help_text=u'ChEMBL identifier for this compound (for use on web interface etc)') # This combination of null and blank is actually very important!
+    chembl = models.ForeignKey(ChemblIdLookup, unique=True, blank=True, null=True, help_text=u'ChEMBL identifier for this compound (for use on web interface etc)') # This combination of null and blank is actually very important!
     max_phase = ChemblPositiveIntegerField(length=1, db_index=True, default=0, choices=MAX_PHASE_CHOICES, help_text=u'Maximum phase of development reached for the compound (4 = approved). Null where max phase has not yet been assigned.')
     therapeutic_flag = ChemblBooleanField(db_index=True, default=False, help_text=u'Indicates that a drug has a therapeutic application (as opposed to e.g., an imaging agent, additive etc).')
     dosed_ingredient = ChemblBooleanField(default=False, help_text=u'Indicates that the drug is dosed in this form (e.g., a particular salt)')
@@ -225,7 +225,7 @@ class MoleculeDictionary(six.with_metaclass(ChemblModelMetaClass, ChemblCoreAbst
     
     #Chembiohub extra fields
     created_by = models.ForeignKey("auth.User", null=True, blank=True)
-    project = models.ForeignKey("cbh_chembl_model_extension.Project", blank=True, null=False)
+    project = models.ForeignKey("cbh_chembl_model_extension.Project", blank=True, null=True)
     forced_reg_reason = ChemblCharField(max_length=200, blank=True, null=True, help_text=u'Reason for forced registration (e.g., known to be a stereoisomer)')
     forced_reg_index = ChemblPositiveIntegerField(length=1, db_index=True, default=0, help_text=u'Number of times this structure key has been forced to be registered')
     public = ChemblBooleanField(default=False, help_text=u'Whether this molecule has been marked as public')
