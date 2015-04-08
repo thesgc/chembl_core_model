@@ -232,6 +232,7 @@ class MoleculeDictionary(six.with_metaclass(ChemblModelMetaClass, ChemblCoreAbst
     objects = MoleculeDictionaryManager()
 
     class Meta(ChemblCoreAbstractModel.Meta):
+        
         unique_together = ('structure_key', 'project', 'structure_type', 'forced_reg_index')
 
 #-----------------------------------------------------------------------------------------------------------------------
