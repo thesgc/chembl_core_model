@@ -73,7 +73,7 @@ class Migration(migrations.Migration):
             options={
                 'abstract': False,
                 'managed': True,
-                'db_table' : 'activities_stds_lookup'
+                'db_table' : 'activity_stds_lookup'
             },
             bases=(models.Model,),
         ),
@@ -208,7 +208,7 @@ class Migration(migrations.Migration):
             ],
             options={
                 'abstract': False,
-                'managed': True,'db_table': 'biotherapeutics_components'
+                'managed': True,'db_table': 'biotherapeutic_components'
             },
             bases=(models.Model,),
         ),
@@ -849,7 +849,7 @@ class Migration(migrations.Migration):
             options={
                 'abstract': False,
                 'managed': True,
-                'db_table': 'protein_classification_synonyms'
+                'db_table': 'protein_class_synonyms'
             },
             bases=(models.Model,),
         ),

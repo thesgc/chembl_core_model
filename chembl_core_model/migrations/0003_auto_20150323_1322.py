@@ -12,66 +12,66 @@ class Migration(migrations.Migration):
     ]
 
     operations = [
-        migrations.AlterField(
-            model_name='celldictionary',
-            name='downgraded',
-            field=chembl_core_db.db.customFields.ChemblNullableBooleanField(default=False, help_text='Indicates the cell line has been removed (if set to 1)'),
-            preserve_default=True,
-        ),
-        migrations.AlterField(
-            model_name='chemblidlookup',
-            name='entity_type',
-            field=chembl_core_db.db.customFields.ChemblCharField(help_text='Type of entity (e.g., COMPOUND, ASSAY, TARGET)', max_length=50, choices=[(b'ASSAY', b'ASSAY'), (b'CELL', b'CELL'), (b'COMPOUND', b'COMPOUND'), (b'DOCUMENT', b'DOCUMENT'), (b'TARGET', b'TARGET')]),
-            preserve_default=True,
-        ),
-        migrations.AlterField(
-            model_name='compoundproperties',
-            name='acd_most_bpka',
-            field=chembl_core_db.db.customFields.ChemblPositiveDecimalField(help_text='The most basic pKa calculated using ACDlabs v12.01', null=True, max_digits=9, decimal_places=2, blank=True),
-            preserve_default=True,
-        ),
-        migrations.AlterField(
-            model_name='defineddailydose',
-            name='ddd_value',
-            field=chembl_core_db.db.customFields.ChemblPositiveDecimalField(help_text='Value of defined daily dose', null=True, max_digits=9, decimal_places=2, blank=True),
-            preserve_default=True,
-        ),
-        migrations.AlterField(
-            model_name='drugmechanism',
-            name='selectivity_comment',
-            field=chembl_core_db.db.customFields.ChemblCharField(blank=True, max_length=100, null=True, help_text='Additional comments regarding the selectivity of the drug', choices=[(b'Broad spectrum', b'Broad spectrum'), (b'EDG5 less relevant', b'EDG5 less relevant'), (b'FGFR 1, 2 + 3', b'FGFR 1, 2 + 3'), (b'M3 selective', b'M3 selective'), (b"Non-selective but type 5 receptor is overexpressed in Cushing's disease", b"Non-selective but type 5 receptor is overexpressed in Cushing's disease"), (b'Selective', b'Selective'), (b'Selective for the brain omega-1 receptor (i.e. BZ1-type, i.e. alpha1/beta1/gamma2-GABA receptor)', b'Selective for the brain omega-1 receptor (i.e. BZ1-type, i.e. alpha1/beta1/gamma2-GABA receptor)'), (b'Selectivity for types 2, 3 and 5', b'Selectivity for types 2, 3 and 5'), (b'selectivity for beta-3 containing complexes', b'selectivity for beta-3 containing complexes')]),
-            preserve_default=True,
-        ),
-        migrations.AlterField(
-            model_name='proteinclassification',
-            name='downgraded',
-            field=chembl_core_db.db.customFields.ChemblBooleanField(default=False),
-            preserve_default=True,
-        ),
-        migrations.AlterField(
-            model_name='targetcomponents',
-            name='homologue',
-            field=chembl_core_db.db.customFields.ChemblPositiveIntegerField(default=0, help_text='Indicates that the given component is a homologue of the correct component (e.g., from a different species) when set to 1. This may be the case if the sequence for the correct protein/nucleic acid cannot be found in sequence databases. A value of 2 indicates that the sequence given is a representative of a species group, e.g., an E. coli protein to represent the target of a broad-spectrum antibiotic.', choices=[(0, b'0'), (1, b'1'), (2, b'2')]),
-            preserve_default=True,
-        ),
-        migrations.AlterField(
-            model_name='targetcomponents',
-            name='relationship',
-            field=chembl_core_db.db.customFields.ChemblCharField(default='UNCURATED', max_length=20, choices=[(b'COMPARATIVE PROTEIN', b'COMPARATIVE PROTEIN'), (b'EQUIVALENT PROTEIN', b'EQUIVALENT PROTEIN'), (b'FUSION PROTEIN', b'FUSION PROTEIN'), (b'GROUP MEMBER', b'GROUP MEMBER'), (b'INTERACTING PROTEIN', b'INTERACTING PROTEIN'), (b'PROTEIN SUBUNIT', b'PROTEIN SUBUNIT'), (b'RNA', b'RNA'), (b'RNA SUBUNIT', b'RNA SUBUNIT'), (b'SINGLE PROTEIN', b'SINGLE PROTEIN'), (b'UNCURATED', b'UNCURATED'), (b'SUBUNIT', b'SUBUNIT')]),
-            preserve_default=True,
-        ),
-        migrations.AlterField(
-            model_name='targetdictionary',
-            name='downgraded',
-            field=chembl_core_db.db.customFields.ChemblBooleanField(default=False, help_text='Flag to indicate that the target is downgraded (if equal to 1)'),
-            preserve_default=True,
-        ),
-        migrations.AlterField(
-            model_name='targetdictionary',
-            name='species_group_flag',
-            field=chembl_core_db.db.customFields.ChemblBooleanField(default=False, help_text="Flag to indicate whether the target represents a group of species, rather than an individual species (e.g., 'Bacterial DHFR'). Where set to 1, indicates that any associated target components will be a representative, rather than a comprehensive set."),
-            preserve_default=True,
-        ),
+        # migrations.AlterField(
+        #     model_name='celldictionary',
+        #     name='downgraded',
+        #     field=chembl_core_db.db.customFields.ChemblNullableBooleanField(default=False, help_text='Indicates the cell line has been removed (if set to 1)'),
+        #     preserve_default=True,
+        # ),
+        # migrations.AlterField(
+        #     model_name='chemblidlookup',
+        #     name='entity_type',
+        #     field=chembl_core_db.db.customFields.ChemblCharField(help_text='Type of entity (e.g., COMPOUND, ASSAY, TARGET)', max_length=50, choices=[(b'ASSAY', b'ASSAY'), (b'CELL', b'CELL'), (b'COMPOUND', b'COMPOUND'), (b'DOCUMENT', b'DOCUMENT'), (b'TARGET', b'TARGET')]),
+        #     preserve_default=True,
+        # ),
+        # migrations.AlterField(
+        #     model_name='compoundproperties',
+        #     name='acd_most_bpka',
+        #     field=chembl_core_db.db.customFields.ChemblPositiveDecimalField(help_text='The most basic pKa calculated using ACDlabs v12.01', null=True, max_digits=9, decimal_places=2, blank=True),
+        #     preserve_default=True,
+        # ),
+        # migrations.AlterField(
+        #     model_name='defineddailydose',
+        #     name='ddd_value',
+        #     field=chembl_core_db.db.customFields.ChemblPositiveDecimalField(help_text='Value of defined daily dose', null=True, max_digits=9, decimal_places=2, blank=True),
+        #     preserve_default=True,
+        # ),
+        # migrations.AlterField(
+        #     model_name='drugmechanism',
+        #     name='selectivity_comment',
+        #     field=chembl_core_db.db.customFields.ChemblCharField(blank=True, max_length=100, null=True, help_text='Additional comments regarding the selectivity of the drug', choices=[(b'Broad spectrum', b'Broad spectrum'), (b'EDG5 less relevant', b'EDG5 less relevant'), (b'FGFR 1, 2 + 3', b'FGFR 1, 2 + 3'), (b'M3 selective', b'M3 selective'), (b"Non-selective but type 5 receptor is overexpressed in Cushing's disease", b"Non-selective but type 5 receptor is overexpressed in Cushing's disease"), (b'Selective', b'Selective'), (b'Selective for the brain omega-1 receptor (i.e. BZ1-type, i.e. alpha1/beta1/gamma2-GABA receptor)', b'Selective for the brain omega-1 receptor (i.e. BZ1-type, i.e. alpha1/beta1/gamma2-GABA receptor)'), (b'Selectivity for types 2, 3 and 5', b'Selectivity for types 2, 3 and 5'), (b'selectivity for beta-3 containing complexes', b'selectivity for beta-3 containing complexes')]),
+        #     preserve_default=True,
+        # ),
+        # migrations.AlterField(
+        #     model_name='proteinclassification',
+        #     name='downgraded',
+        #     field=chembl_core_db.db.customFields.ChemblBooleanField(default=False),
+        #     preserve_default=True,
+        # ),
+        # migrations.AlterField(
+        #     model_name='targetcomponents',
+        #     name='homologue',
+        #     field=chembl_core_db.db.customFields.ChemblPositiveIntegerField(default=0, help_text='Indicates that the given component is a homologue of the correct component (e.g., from a different species) when set to 1. This may be the case if the sequence for the correct protein/nucleic acid cannot be found in sequence databases. A value of 2 indicates that the sequence given is a representative of a species group, e.g., an E. coli protein to represent the target of a broad-spectrum antibiotic.', choices=[(0, b'0'), (1, b'1'), (2, b'2')]),
+        #     preserve_default=True,
+        # ),
+        # migrations.AlterField(
+        #     model_name='targetcomponents',
+        #     name='relationship',
+        #     field=chembl_core_db.db.customFields.ChemblCharField(default='UNCURATED', max_length=20, choices=[(b'COMPARATIVE PROTEIN', b'COMPARATIVE PROTEIN'), (b'EQUIVALENT PROTEIN', b'EQUIVALENT PROTEIN'), (b'FUSION PROTEIN', b'FUSION PROTEIN'), (b'GROUP MEMBER', b'GROUP MEMBER'), (b'INTERACTING PROTEIN', b'INTERACTING PROTEIN'), (b'PROTEIN SUBUNIT', b'PROTEIN SUBUNIT'), (b'RNA', b'RNA'), (b'RNA SUBUNIT', b'RNA SUBUNIT'), (b'SINGLE PROTEIN', b'SINGLE PROTEIN'), (b'UNCURATED', b'UNCURATED'), (b'SUBUNIT', b'SUBUNIT')]),
+        #     preserve_default=True,
+        # ),
+        # migrations.AlterField(
+        #     model_name='targetdictionary',
+        #     name='downgraded',
+        #     field=chembl_core_db.db.customFields.ChemblBooleanField(default=False, help_text='Flag to indicate that the target is downgraded (if equal to 1)'),
+        #     preserve_default=True,
+        # ),
+        # migrations.AlterField(
+        #     model_name='targetdictionary',
+        #     name='species_group_flag',
+        #     field=chembl_core_db.db.customFields.ChemblBooleanField(default=False, help_text="Flag to indicate whether the target represents a group of species, rather than an individual species (e.g., 'Bacterial DHFR'). Where set to 1, indicates that any associated target components will be a representative, rather than a comprehensive set."),
+        #     preserve_default=True,
+        # ),
         # migrations.AlterModelTable(
         #     name='actiontype',
         #     table=None,

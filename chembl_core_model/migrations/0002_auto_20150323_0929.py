@@ -20,7 +20,7 @@ class Migration(migrations.Migration):
             options={
                 'abstract': False,
                 'managed': True,
-                'db_table':'compund_structural_alerts'
+                'db_table':'compound_structural_alerts'
             },
         ),
         migrations.CreateModel(
@@ -125,7 +125,7 @@ class Migration(migrations.Migration):
             ],
             options={
                 'abstract': False,
-                'managed': True,'db_table': 'patient_use_codes'
+                'managed': True,'db_table': 'patent_use_codes'
             },
         ),
         migrations.CreateModel(
