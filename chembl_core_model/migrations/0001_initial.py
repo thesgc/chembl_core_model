@@ -8,6 +8,7 @@ import chembl_core_db.db.customFields
 
 
 
+
 class Migration(migrations.Migration):
 
     dependencies = [
@@ -1422,4 +1423,7 @@ class Migration(migrations.Migration):
             field=models.ForeignKey(help_text='Foreign key to the compound_records table (containing information on the compound tested)', to='chembl_core_model.CompoundRecords'),
             preserve_default=True,
         ),
+
+        migrations.RunSQL("delete from compound_mols ;alter table compound_mols drop column ctab;alter table compound_mols add column ctab mol;"),
+
     ]
