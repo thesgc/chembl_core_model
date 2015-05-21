@@ -12,12 +12,12 @@ class Migration(migrations.Migration):
     ]
 
     operations = [
-        #migrations.AlterField(
-        #     model_name='chemblidlookup',
-        #     name='entity_id',
-        #     field=chembl_core_db.db.customFields.ChemblIntegerField(default=None, help_text='Primary key for that entity in corresponding table (e.g., molregno for compounds, tid for targets)', null=True),
-        #     preserve_default=True,
-        # ),
+        migrations.AlterField(
+            model_name='chemblidlookup',
+            name='entity_id',
+            field=chembl_core_db.db.customFields.ChemblIntegerField(default=-1, help_text='Primary key for that entity in corresponding table (e.g., molregno for compounds, tid for targets)', null=True),
+            preserve_default=True,
+        ),
         # migrations.AlterField(
         #     model_name='chemblidlookup',
         #     name='entity_type',
