@@ -26,6 +26,7 @@ class ChemblIdLookup(six.with_metaclass(ChemblModelMetaClass, ChemblCoreAbstract
         ('COMPOUND', 'COMPOUND'),
         ('DOCUMENT', 'DOCUMENT'),
         ('TARGET', 'TARGET'),
+        ('BLINDED_BATCH', 'BLINDED_BATCH'),
         )
 
     STATUS_CHOICES = (
@@ -36,7 +37,7 @@ class ChemblIdLookup(six.with_metaclass(ChemblModelMetaClass, ChemblCoreAbstract
 
     chembl_id = ChemblCharField(primary_key=True, max_length=20, help_text=u'ChEMBL identifier')
     entity_type = ChemblCharField(max_length=50, choices=ENTITY_TYPE_CHOICES, help_text=u'Type of entity (e.g., COMPOUND, ASSAY, TARGET)')
-    entity_id = ChemblIntegerField(length=9, help_text=u'Primary key for that entity in corresponding table (e.g., molregno for compounds, tid for targets)')
+    entity_id = ChemblIntegerField(length=9, help_text=u'Primary key for that entity in corresponding table (e.g., molregno for compounds, tid for targets)', null=True, default=None)
     status = ChemblCharField(max_length=10, default=u'ACTIVE', choices=STATUS_CHOICES, help_text=u'Indicates whether the status of the entity within the database - ACTIVE, INACTIVE (downgraded), OBS (obsolete/removed).')
 
     class Meta(ChemblCoreAbstractModel.Meta):
