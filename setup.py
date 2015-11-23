@@ -19,7 +19,8 @@ setup(
     url='https://www.ebi.ac.uk/chembl/',
     license='Apache Software License',
     packages=['chembl_core_model',
-              'chembl_core_model.models'],
+              'chembl_core_model.models',
+              'chembl_core_model.migrations',],
     long_description=open('README.rst').read(),
     install_requires=[
         'chembl_core_db>=0.6.2',
