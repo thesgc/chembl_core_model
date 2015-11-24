@@ -23,7 +23,6 @@ setup(
               'chembl_core_model.migrations',],
     long_description=open('README.rst').read(),
     install_requires=[
-        'chembl_core_db>=0.6.2',
         'pyyaml',
     ],
     package_data={
